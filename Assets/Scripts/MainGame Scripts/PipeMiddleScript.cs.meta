@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 0eab09b87254d424c8a4c2980d83320d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - logic: {instanceID: 0}
+  - dingSound: {fileID: 8300000, guid: c6353bf045d05634eb1587f49a2ae75d, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
