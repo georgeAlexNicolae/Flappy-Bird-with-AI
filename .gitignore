@@ -55,6 +55,14 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
+# Virtual environment
+venv/
+
+#Environments
+.venv
+venv/
+venv.bak/
+
 # Crashlytics generated file
 crashlytics-build.properties
 
