@@ -307,8 +307,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbc5e6519af3ff2449cdaf6ac6ff1441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 21.6
-  deadZone: -45
+  moveSpeed: 13.6
+  deadZone: -42.6
 --- !u!1 &7505328621764557119
 GameObject:
   m_ObjectHideFlags: 0
