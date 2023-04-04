@@ -1,0 +1,42 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1680637138",
+        "python_version": "3.9.10 (tags/v3.9.10:f2f3f53, Jan 17 2022, 15:14:21) [MSC v.1929 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\Alex\\Documents\\GitHub\\Flappy-Bird-with-AI\\new_venv_py39\\Scripts\\mlagents-learn config/ppo/DifficultyAgent_config.yaml --run-id=DifficultyAgent_run5 --no-graphics",
+        "mlagents_version": "0.30.0",
+        "mlagents_envs_version": "0.30.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "2.0.0+cpu",
+        "numpy_version": "1.21.2",
+        "end_time_seconds": "1680637160"
+    },
+    "total": 21.7285143,
+    "count": 1,
+    "self": 0.006708199999998499,
+    "children": {
+        "run_training.setup": {
+            "total": 0.08910620000000002,
+            "count": 1,
+            "self": 0.08910620000000002
+        },
+        "TrainerController.start_learning": {
+            "total": 21.632699900000002,
+            "count": 1,
+            "self": 8.330000000000837e-05,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 21.6325974,
+                    "count": 1,
+                    "self": 21.6325974
+                },
+                "TrainerController._save_models": {
+                    "total": 1.920000000055211e-05,
+                    "count": 1,
+                    "self": 1.920000000055211e-05
+                }
+            }
+        }
+    }
+}
