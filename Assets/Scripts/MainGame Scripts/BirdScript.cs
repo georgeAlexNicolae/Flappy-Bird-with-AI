@@ -39,5 +39,11 @@ public class BirdScript : MonoBehaviour
     {
         logic.gameOver();
         birdIsAlive = false;
+        // Notify the agent of the collision
+        AIBirdAgent aiBirdAgent = GetComponent<AIBirdAgent>();
+        if (aiBirdAgent != null)
+        {
+            aiBirdAgent.OnCollision();
+        }
     }
 }

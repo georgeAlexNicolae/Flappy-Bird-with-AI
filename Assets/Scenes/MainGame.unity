@@ -5694,7 +5694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myRigidBody: {fileID: 979610261}
-  flapStrength: 11.47
+  flapStrength: 10.3
   logic: {fileID: 0}
   birdIsAlive: 1
 --- !u!58 &979610265
