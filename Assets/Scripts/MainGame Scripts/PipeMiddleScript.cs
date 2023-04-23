@@ -22,22 +22,15 @@ public class PipeMiddleScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 3)
+        if(collision.gameObject.layer == 3)
         {
             BirdScript birdScript = collision.GetComponent<BirdScript>();
-            if (birdScript != null && birdScript.birdIsAlive == true)
+            if(birdScript != null && birdScript.birdIsAlive==true) 
             {
                 logic.addScore(1);
                 audioSource.PlayOneShot(dingSound);
-
-                // Notify the agent that it passed through a pipe
-                AIBirdAgent aiBirdAgent = collision.GetComponent<AIBirdAgent>();
-                if (aiBirdAgent != null)
-                {
-                    aiBirdAgent.PassedPipe();
-                }
             }
+            
         }
     }
-
 }
