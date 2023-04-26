@@ -10,15 +10,9 @@ public class BirdAgent : Agent
     public LogicScript logic;
     private Vector3 birdStartPosition = new Vector3(-21.0f, 0.0f, 0.0f);
 
-
-    private void Start()
+    public override void Initialize()
     {
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
-    }
-
-    private void FixedUpdate()
-    {
-            AddReward(0.05f);
     }
 
     public override void OnEpisodeBegin()
@@ -29,6 +23,11 @@ public class BirdAgent : Agent
         logic.playerScore = 0;
     }
 
+    private void FixedUpdate()
+    {
+        AddReward(0.05f);
+    }
+
     public override void CollectObservations(VectorSensor sensor)
     {
         // Add the bird's vertical position and vertical velocity as observations
@@ -36,15 +35,17 @@ public class BirdAgent : Agent
         sensor.AddObservation(myRigidBody.velocity.y);
     }
 
+    private int lastInput;
+    public override void Heuristic(in ActionBuffers actionsOut)
+    {
+        var discreteActions = actionsOut.DiscreteActions;
+        discreteActions[0] = lastInput == 0?(Input.GetKey(KeyCode.Space) ? 1 : 0):0;
+        lastInput = Input.GetKey(KeyCode.Space) ? 1 : 0;
+    }
+
     public override void OnActionReceived(ActionBuffers actions)
     {
         myRigidBody.velocity = myRigidBody.velocity + Vector2.up * flapStrength * actions.DiscreteActions[0];
-    }
-
-    public override void Heuristic(in ActionBuffers actionsOut)
-    {
-        ActionSegment<int> discreteActions = actionsOut.DiscreteActions;
-        discreteActions[0] = Input.GetKeyDown(KeyCode.Space) ? 1 : 0;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
