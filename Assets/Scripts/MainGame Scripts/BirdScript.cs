@@ -26,14 +26,16 @@ public class BirdScript : MonoBehaviour
                 birdIsAlive = false;
             }
         }
-        
+       
+    }
+    void FixedUpdate()
+    {
         if (Input.GetKeyDown(KeyCode.Space) == true && birdIsAlive == true)
         {
             myRigidBody.velocity = Vector2.up * flapStrength;
         }
-
-       
     }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

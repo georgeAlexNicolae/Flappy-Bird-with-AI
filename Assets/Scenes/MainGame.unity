@@ -560,25 +560,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a61d71bf2698a1a4dbd0c7d0c63dc5bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PolicyFactory: {fileID: 0}
-  agentParameters:
-    maxStep: 0
-  hasUpgradedFromAgentParameters: 1
-  MaxStep: 0
-  m_Reward: 0
-  m_GroupReward: 0
-  m_CumulativeReward: 0
-  m_RequestAction: 0
-  m_RequestDecision: 0
-  m_StepCount: 0
-  m_CompletedEpisodes: 0
-  m_EpisodeId: 0
-  m_Initialized: 0
-  m_GroupId: 0
-  pipeSpawner: {fileID: 1941366625}
-  birdScript: {fileID: 0}
-  logicScript: {fileID: 1712960503}
-  previousScore: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -5781,7 +5762,7 @@ MonoBehaviour:
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
-  m_BehaviorType: 1
+  m_BehaviorType: 0
   m_BehaviorName: BirdAgent
   TeamId: 0
   m_UseChildSensors: 1
@@ -5818,7 +5799,7 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
   myRigidBody: {fileID: 979610261}
-  flapStrength: 5
+  flapStrength: 25
   logic: {fileID: 1712960503}
 --- !u!1 &1098618896
 GameObject:
@@ -6397,7 +6378,7 @@ GameObject:
   - component: {fileID: 1854432716}
   m_Layer: 5
   m_Name: Button (Legacy)
-  m_TagString: Untagged
+  m_TagString: PlayAgainButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6562,7 +6543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pipe: {fileID: 1661501698465033722, guid: 98bf8a9d839bd8946956c2d01acb8d4b, type: 3}
-  spawnRate: 2
+  spawnRate: 1.5
   heightOffset: 7.5
 --- !u!1 &2039657331
 GameObject:

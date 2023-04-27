@@ -2,6 +2,7 @@ using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BirdAgent : Agent
 {
@@ -28,6 +29,18 @@ public class BirdAgent : Agent
         AddReward(0.05f);
     }
 
+    private void Update()
+    {
+        if (IsBirdOutOfScreen())
+        {
+            logic.gameOver();
+            AddReward(-1f);
+            EndEpisode();
+            ClickPlayAgainButton();
+        }
+    }
+
+
     public override void CollectObservations(VectorSensor sensor)
     {
         // Add the bird's vertical position and vertical velocity as observations
@@ -45,7 +58,10 @@ public class BirdAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        myRigidBody.velocity = myRigidBody.velocity + Vector2.up * flapStrength * actions.DiscreteActions[0];
+        if (actions.DiscreteActions[0] == 1)
+        {
+            myRigidBody.velocity = Vector2.up * flapStrength;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -53,11 +69,42 @@ public class BirdAgent : Agent
         logic.gameOver();
         AddReward(-3f);
         EndEpisode();
+        ClickPlayAgainButton();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
     logic.addScore(1);
     AddReward(1f);
+
     }
+
+    private void ClickPlayAgainButton()
+    {
+        GameObject playAgainButtonObj = GameObject.FindGameObjectWithTag("PlayAgainButton");
+        if (playAgainButtonObj != null)
+        {
+            Button playAgainButton = playAgainButtonObj.GetComponent<Button>();
+            if (playAgainButton != null)
+            {
+                playAgainButton.onClick.Invoke();
+            }
+        }
+    }
+
+    private bool IsBirdOutOfScreen()
+    {
+        Vector2 screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        float birdWidth = GetComponent<SpriteRenderer>().bounds.size.x;
+
+        if (transform.position.y > screenBounds.y + birdWidth / 2 ||
+            transform.position.y < -screenBounds.y - birdWidth / 2)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+
 }
