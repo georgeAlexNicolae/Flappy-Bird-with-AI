@@ -36,7 +36,7 @@ public class BirdAgent : Agent
             logic.gameOver();
             AddReward(-1f);
             EndEpisode();
-            ClickPlayAgainButton();
+            //ClickPlayAgainButton();
         }
     }
 
@@ -69,7 +69,7 @@ public class BirdAgent : Agent
         logic.gameOver();
         AddReward(-3f);
         EndEpisode();
-        ClickPlayAgainButton();
+        //ClickPlayAgainButton();
         Debug.Log("ded " + collision.gameObject.name);
     }
 
