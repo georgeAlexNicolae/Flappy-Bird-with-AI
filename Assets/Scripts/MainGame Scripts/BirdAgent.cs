@@ -36,7 +36,7 @@ public class BirdAgent : Agent
             logic.gameOver();
             AddReward(-1f);
             EndEpisode();
-            ClickPlayAgainButton();
+            //ClickPlayAgainButton();
         }
     }
 
@@ -69,14 +69,14 @@ public class BirdAgent : Agent
         logic.gameOver();
         AddReward(-3f);
         EndEpisode();
-        ClickPlayAgainButton();
+        //ClickPlayAgainButton();
+        Debug.Log("ded " + collision.gameObject.name);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-    logic.addScore(1);
-    AddReward(1f);
-
+        logic.addScore(1);
+        AddReward(1f);
     }
 
     private void ClickPlayAgainButton()
