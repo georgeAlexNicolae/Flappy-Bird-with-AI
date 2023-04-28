@@ -70,13 +70,13 @@ public class BirdAgent : Agent
         AddReward(-3f);
         EndEpisode();
         ClickPlayAgainButton();
+        Debug.Log("ded " + collision.gameObject.name);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-    logic.addScore(1);
-    AddReward(1f);
-
+        logic.addScore(1);
+        AddReward(1f);
     }
 
     private void ClickPlayAgainButton()
