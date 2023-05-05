@@ -7,7 +7,6 @@ TagManager:
   - Logic
   - Pipe
   - PlayAgainButton
-  - PipeGap
   layers:
   - Default
   - TransparentFX
