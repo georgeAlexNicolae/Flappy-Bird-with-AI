@@ -63,7 +63,7 @@ public class LogicScript : MonoBehaviour
 
     public void gameOver()
     {
-        //gameOverScreen.SetActive(true);
+        gameOverScreen.SetActive(true);
         SaveHighScoreWithName(playerScore);
     }
 
