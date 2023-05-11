@@ -25,9 +25,36 @@ public class BirdAgent : Agent
         myRigidBody.velocity = Vector2.zero;
         logic.playerScore = 0;
         if (isFirstRun)
-        {
+        { 
+            // Find all the pipe gaps in the scene
+            GameObject[] pipeGaps = GameObject.FindGameObjectsWithTag("PipeGap");
+
+            // Find the pipe gap closest to the bird's current X position
+            GameObject closestPipeGap = null;
+            float closestX = float.MaxValue;
+
             // Set the bird's position to the initial start position on the first run
-            transform.position = birdStartPosition;
+            foreach (GameObject gap in pipeGaps)
+            {
+                float distance = Mathf.Abs(gap.transform.position.x - transform.position.x);
+                if (distance < closestX)
+                {
+                    closestX = distance;
+                    closestPipeGap = gap;
+                }
+                if (closestPipeGap != null)
+                {
+                    // Calculate the middle position of the gap
+                    float middleY = closestPipeGap.transform.position.y;
+
+                    transform.position = new Vector3(-20.17f, middleY, 0f);
+                }
+                else
+                {
+                    transform.position = birdStartPosition;
+                }
+            }
+            //transform.position = birdStartPosition;
             isFirstRun = false;
         }
         else
