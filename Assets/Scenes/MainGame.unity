@@ -5601,7 +5601,7 @@ MonoBehaviour:
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 5022602860645237092, guid: fdcfa71be3746bf459a417ed23656ed2, type: 3}
   m_InferenceDevice: 0
-  m_BehaviorType: 0
+  m_BehaviorType: 2
   m_BehaviorName: BirdAgent
   TeamId: 0
   m_UseChildSensors: 1
@@ -6305,6 +6305,9 @@ MonoBehaviour:
   playerScore: 0
   scoreText: {fileID: 96958728}
   gameOverScreen: {fileID: 122969070}
+  DidPassPipe: 0
+  DidHitPipe: 0
+  DidMissPipe: 0
 --- !u!4 &1712960504
 Transform:
   m_ObjectHideFlags: 0
@@ -6464,6 +6467,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1941366624}
   - component: {fileID: 1941366625}
+  - component: {fileID: 1941366627}
+  - component: {fileID: 1941366626}
+  - component: {fileID: 1941366628}
   m_Layer: 0
   m_Name: Pipe Spawner
   m_TagString: Untagged
@@ -6501,6 +6507,71 @@ MonoBehaviour:
   pipe: {fileID: 1661501698465033722, guid: 98bf8a9d839bd8946956c2d01acb8d4b, type: 3}
   spawnRate: 1.5
   heightOffset: 7.5
+--- !u!114 &1941366626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941366622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BrainParameters:
+    VectorObservationSize: 2
+    NumStackedVectorObservations: 1
+    m_ActionSpec:
+      m_NumContinuousActions: 1
+      BranchSizes: 
+    VectorActionSize: 01000000
+    VectorActionDescriptions: []
+    VectorActionSpaceType: 1
+    hasUpgradedBrainParametersWithActionSpec: 1
+  m_Model: {fileID: 5022602860645237092, guid: 664bc60966a484f4891539353c141c3d, type: 3}
+  m_InferenceDevice: 0
+  m_BehaviorType: 0
+  m_BehaviorName: PipeSpawnerAgent
+  TeamId: 0
+  m_UseChildSensors: 1
+  m_UseChildActuators: 1
+  m_ObservableAttributeHandling: 0
+--- !u!114 &1941366627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941366622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7752339408e2d2408163be2c5d37a87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 0
+  pipeSpawner: {fileID: 1941366625}
+  birdAgent: {fileID: 990041305}
+  logic: {fileID: 1712960503}
+  maxPipeSpeed: 0.9
+  minPipeSpeed: 3
+--- !u!114 &1941366628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941366622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &2039657331
 GameObject:
   m_ObjectHideFlags: 0

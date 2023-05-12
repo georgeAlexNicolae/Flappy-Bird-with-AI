@@ -6,21 +6,38 @@ using UnityEngine.UI;
 
 public class LogicScript : MonoBehaviour
 {
-   public int playerScore;
+    public int playerScore;
     public Text scoreText;
     public GameObject gameOverScreen;
+    public bool DidPassPipe = false;
+    public bool DidHitPipe = false;
+    public bool DidMissPipe = false;
 
     [ContextMenu("Increase score")]
     public void addScore(int scoreToAdd)
-    { 
+    {
         playerScore = playerScore + scoreToAdd;
         scoreText.text = playerScore.ToString();
+        DidPassPipe = true;
+    }
+    void Update()
+    {
+        ResetFlags();
+    }
+
+    public void hitPipe()
+    {
+        DidHitPipe = true;
+    }
+
+    public void missedPipe()
+    {
+        DidMissPipe = true;
     }
 
     public void restartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
     }
 
     public void StartMenu()
@@ -60,11 +77,17 @@ public class LogicScript : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-
     public void gameOver()
     {
         gameOverScreen.SetActive(true);
         SaveHighScoreWithName(playerScore);
     }
 
+    // Call this method in every frame of your game loop
+    public void ResetFlags()
+    {
+        DidPassPipe = false;
+        DidHitPipe = false;
+        DidMissPipe = false;
+    }
 }

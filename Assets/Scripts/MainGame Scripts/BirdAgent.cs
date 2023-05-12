@@ -13,6 +13,7 @@ public class BirdAgent : Agent
     private Vector3 birdStartPosition = new Vector3(-21.0f, 0.0f, 0.0f);
     private bool isFirstRun = true;
     private bool flap = false;
+    private int counter = 0;
 
     public override void Initialize()
     {
@@ -93,6 +94,11 @@ public class BirdAgent : Agent
 
     private void FixedUpdate()
     {
+        if (counter <= 2)
+        {
+            myRigidBody.velocity = Vector2.up * flapStrength;
+            counter++;
+        }
         AddReward(0.05f);
         if (flap)
         {
@@ -139,6 +145,7 @@ public class BirdAgent : Agent
     private void OnCollisionEnter2D(Collision2D collision)
     {
         logic.gameOver();
+        logic.DidHitPipe = true;
         AddReward(-3f);
         EndEpisode();
         ClickPlayAgainButton();
@@ -148,6 +155,7 @@ public class BirdAgent : Agent
     private void OnTriggerEnter2D(Collider2D collision)
     {
         logic.addScore(1);
+        logic.DidPassPipe = true;
         AddReward(1f);
     }
 
@@ -166,23 +174,26 @@ public class BirdAgent : Agent
 
     private bool IsBirdOutOfScreen()
     {
-            Vector2 screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-            Vector2 birdSize = GetComponent<SpriteRenderer>().bounds.size;
+        Vector2 screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        Vector2 birdSize = GetComponent<SpriteRenderer>().bounds.size;
 
-            // Check if the bird is out of the screen on the y axis (up or down)
-            if (transform.position.y > screenBounds.y + birdSize.y / 2 ||
-                transform.position.y < -screenBounds.y - birdSize.y / 2)
-            {
-                return true;
-            }
-
-            // Check if the bird is out of the screen on the x axis (left)
-            if (transform.position.x < -screenBounds.x - birdSize.x / 2)
-            {
-                return true;
-            }
-
-            return false;
+        // Check if the bird is out of the screen on the y axis (up or down)
+        if (transform.position.y > screenBounds.y + birdSize.y / 2 ||
+            transform.position.y < -screenBounds.y - birdSize.y / 2)
+        {
+            logic.missedPipe();
+            return true;
         }
 
+        // Check if the bird is out of the screen on the x axis (left)
+        if (transform.position.x < -screenBounds.x - birdSize.x / 2)
+        {
+            logic.missedPipe();
+            return true;
+        }
+
+        return false;
     }
+
+
+}
