@@ -121,7 +121,6 @@ public class BirdAgent : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        // Add the bird's vertical position and vertical velocity as observations
         sensor.AddObservation(transform.position.y);
         sensor.AddObservation(myRigidBody.velocity.y);
     }
@@ -149,7 +148,6 @@ public class BirdAgent : Agent
         AddReward(-3f);
         EndEpisode();
         ClickPlayAgainButton();
-        Debug.Log("ded " + collision.gameObject.name);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

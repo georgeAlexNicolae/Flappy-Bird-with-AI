@@ -25,7 +25,6 @@ public class PipeSpawnerAgent : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        // Observe the bird's score and the current pipe spawn settings
         sensor.AddObservation(logic.playerScore);
         sensor.AddObservation(pipeSpawner.spawnRate);
     }
