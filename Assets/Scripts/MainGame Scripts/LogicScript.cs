@@ -13,6 +13,7 @@ public class LogicScript : MonoBehaviour
     public bool DidHitPipe = false;
     public bool DidMissPipe = false;
     public DataLogger logger;
+    public bool gameIsOver = false;
 
     [ContextMenu("Increase score")]
     public void addScore(int scoreToAdd)
@@ -43,8 +44,9 @@ public class LogicScript : MonoBehaviour
 
     public void restartGame()
     {
+        gameIsOver = false;
+        Debug.Log("LogicScript restartGame: " + Time.realtimeSinceStartup);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        logger.OnGameRestart();
     }
 
     public void StartMenu()
@@ -86,6 +88,8 @@ public class LogicScript : MonoBehaviour
 
     public void gameOver()
     {
+        gameIsOver = true;
+        Debug.Log("LogicScript GameOver: " + Time.realtimeSinceStartup);
         gameOverScreen.SetActive(true);
         SaveHighScoreWithName(playerScore);
         restartGame();

@@ -5601,7 +5601,7 @@ MonoBehaviour:
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 5022602860645237092, guid: fdcfa71be3746bf459a417ed23656ed2, type: 3}
   m_InferenceDevice: 0
-  m_BehaviorType: 1
+  m_BehaviorType: 2
   m_BehaviorName: BirdAgent
   TeamId: 0
   m_UseChildSensors: 1
@@ -5891,53 +5891,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1098618896}
   m_CullTransparentMesh: 1
---- !u!1 &1100096401
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1100096403}
-  - component: {fileID: 1100096402}
-  m_Layer: 0
-  m_Name: Data Logger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1100096402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1100096401}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67900e74230932d419e7dbb88ee8a992, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  logicScript: {fileID: 1712960503}
-  birdAgent: {fileID: 990041305}
-  pipeSpawnerAgent: {fileID: 1941366627}
---- !u!4 &1100096403
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1100096401}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.8624597, y: -0.13376543, z: 1.3146474}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1124284427
 GameObject:
   m_ObjectHideFlags: 0
@@ -6355,7 +6308,8 @@ MonoBehaviour:
   DidPassPipe: 0
   DidHitPipe: 0
   DidMissPipe: 0
-  logger: {fileID: 1100096402}
+  logger: {fileID: 0}
+  gameIsOver: 0
 --- !u!4 &1712960504
 Transform:
   m_ObjectHideFlags: 0
