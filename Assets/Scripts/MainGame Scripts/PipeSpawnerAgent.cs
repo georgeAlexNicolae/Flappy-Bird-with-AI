@@ -2,7 +2,6 @@ using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents;
 using UnityEngine;
-using System.Collections;
 
 public class PipeSpawnerAgent : Agent
 {
@@ -20,19 +19,10 @@ public class PipeSpawnerAgent : Agent
 
     public override void OnEpisodeBegin()
     {
-        // Introduce a delay before starting the episode
-        StartCoroutine(DelayedEpisodeStart());
-    }
-
-    IEnumerator DelayedEpisodeStart()
-    {
-        // Code for delaying the game
-        yield return new WaitForSeconds(1f);  // 1 second delay before starting the game
-
-        // Now all the code you previously had in OnEpisodeBegin goes here
         // Reset the pipe spawner settings here
-        pipeSpawner.spawnRate = minPipeSpeed;
+        //pipeSpawner.spawnRate = minPipeSpeed;
     }
+
     public override void CollectObservations(VectorSensor sensor)
     {
         sensor.AddObservation(logic.playerScore);

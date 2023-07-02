@@ -5626,6 +5626,7 @@ MonoBehaviour:
   myRigidBody: {fileID: 990041307}
   flapStrength: 25
   logic: {fileID: 1712960503}
+  isCountdown: 1
 --- !u!58 &990041306
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6308,8 +6309,8 @@ MonoBehaviour:
   DidPassPipe: 0
   DidHitPipe: 0
   DidMissPipe: 0
-  logger: {fileID: 0}
-  gameIsOver: 0
+  birdAgent: {fileID: 990041305}
+  countdownTime: 1
 --- !u!4 &1712960504
 Transform:
   m_ObjectHideFlags: 0

@@ -4,7 +4,6 @@ using Unity.MLAgents.Actuators;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-using System.Collections;
 
 public class BirdAgent : Agent
 {
@@ -14,8 +13,7 @@ public class BirdAgent : Agent
     private Vector3 birdStartPosition = new Vector3(-21.0f, 0.0f, 0.0f);
     private bool isFirstRun = true;
     private bool flap = false;
-    private int counter = 0;
-
+    public bool isCountdown = true;
     public override void Initialize()
     {
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
@@ -23,20 +21,11 @@ public class BirdAgent : Agent
 
     public override void OnEpisodeBegin()
     {
-        StartCoroutine(DelayedEpisodeStart());
-    }
-
-    IEnumerator DelayedEpisodeStart()
-    {
-        // Code for delaying the game
-        yield return new WaitUntil(() => !logic.gameIsOver);  // 1 second delay before starting the game
-
-        // Now all the code you previously had in OnEpisodeBegin goes here
         // Reset the bird's position and velocity
         myRigidBody.velocity = Vector2.zero;
         logic.playerScore = 0;
         if (isFirstRun)
-        {
+        { 
             // Find all the pipe gaps in the scene
             GameObject[] pipeGaps = GameObject.FindGameObjectsWithTag("PipeGap");
 
@@ -100,15 +89,10 @@ public class BirdAgent : Agent
                 transform.position = new Vector3(-20.17f, birdStartPosition.y, birdStartPosition.z);
             }
         }
-        counter = 0;
     }
-private void FixedUpdate()
+
+    private void FixedUpdate()
     {
-        if (counter <= 2)
-        {
-            myRigidBody.velocity = Vector2.up * flapStrength;
-            counter++;
-        }
         AddReward(0.05f);
         if (flap)
         {

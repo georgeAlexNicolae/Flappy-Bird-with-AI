@@ -12,8 +12,10 @@ public class LogicScript : MonoBehaviour
     public bool DidPassPipe = false;
     public bool DidHitPipe = false;
     public bool DidMissPipe = false;
-    public DataLogger logger;
-    public bool gameIsOver = false;
+    public BirdAgent birdAgent;
+    public float countdownTime = 1f;
+    private float countdownRemaining = 1f;
+    private bool hasGameStarted = false;
 
     [ContextMenu("Increase score")]
     public void addScore(int scoreToAdd)
@@ -22,15 +24,65 @@ public class LogicScript : MonoBehaviour
         scoreText.text = playerScore.ToString();
         DidPassPipe = true;
     }
-    void Update()
-    {
-        ResetFlags();
-    }
 
     void Start()
     {
-        logger = GameObject.FindObjectOfType<DataLogger>();
+
+        StartCountdown();
     }
+
+    void Update()
+    {
+        if (!hasGameStarted)
+        {
+            Debug.Log("Countdown Remaining: " + countdownRemaining);
+            countdownRemaining -= Time.deltaTime;
+
+            if (countdownRemaining <= 0)
+            {
+                hasGameStarted = true;
+                ResetFlags();
+            }
+        }
+        else
+        {
+            // The game has started, so reset the flags
+            ResetFlags();
+        }
+    }
+
+    public void StartCountdown()
+    {
+        hasGameStarted = false;
+        countdownRemaining = countdownTime;
+        StartCoroutine(CountdownCoroutine());
+    }
+    private IEnumerator CountdownCoroutine()
+    {
+        Time.timeScale = 0; // Pause the game
+        float startTime = Time.realtimeSinceStartup;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < countdownTime)
+        {
+            elapsedTime = Time.realtimeSinceStartup - startTime;
+            countdownRemaining = countdownTime - elapsedTime;
+            Debug.Log("Countdown Remaining: " + countdownRemaining);
+            yield return null;
+        }
+
+        hasGameStarted = true;
+        StartGame(); // Resume the game
+        ResetFlags();
+    }
+
+    void OnEnable()
+    {
+        Debug.Log("OnEnable called");
+        Time.timeScale = 1;
+        StartCountdown();
+    }
+
 
     public void hitPipe()
     {
@@ -44,9 +96,12 @@ public class LogicScript : MonoBehaviour
 
     public void restartGame()
     {
-        gameIsOver = false;
-        Debug.Log("LogicScript restartGame: " + Time.realtimeSinceStartup);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    private void StartGame()
+    {
+        birdAgent.enabled = true; // Enable the BirdAgent component to control the bird
+        Time.timeScale = 1f; // Resume the game time scale
     }
 
     public void StartMenu()
@@ -88,8 +143,6 @@ public class LogicScript : MonoBehaviour
 
     public void gameOver()
     {
-        gameIsOver = true;
-        Debug.Log("LogicScript GameOver: " + Time.realtimeSinceStartup);
         gameOverScreen.SetActive(true);
         SaveHighScoreWithName(playerScore);
         restartGame();
