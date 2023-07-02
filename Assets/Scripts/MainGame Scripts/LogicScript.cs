@@ -12,6 +12,7 @@ public class LogicScript : MonoBehaviour
     public bool DidPassPipe = false;
     public bool DidHitPipe = false;
     public bool DidMissPipe = false;
+    public DataLogger logger;
 
     [ContextMenu("Increase score")]
     public void addScore(int scoreToAdd)
@@ -23,6 +24,11 @@ public class LogicScript : MonoBehaviour
     void Update()
     {
         ResetFlags();
+    }
+
+    void Start()
+    {
+        logger = GameObject.FindObjectOfType<DataLogger>();
     }
 
     public void hitPipe()
@@ -38,6 +44,7 @@ public class LogicScript : MonoBehaviour
     public void restartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        logger.OnGameRestart();
     }
 
     public void StartMenu()
@@ -81,7 +88,9 @@ public class LogicScript : MonoBehaviour
     {
         gameOverScreen.SetActive(true);
         SaveHighScoreWithName(playerScore);
+        restartGame();
     }
+
 
     // Call this method in every frame of your game loop
     public void ResetFlags()
