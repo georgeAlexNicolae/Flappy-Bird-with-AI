@@ -145,7 +145,7 @@ public class LogicScript : MonoBehaviour
     {
         gameOverScreen.SetActive(true);
         SaveHighScoreWithName(playerScore);
-        restartGame();
+        //restartGame();
     }
 
 
