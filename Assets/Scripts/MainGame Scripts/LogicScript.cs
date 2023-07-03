@@ -13,9 +13,10 @@ public class LogicScript : MonoBehaviour
     public bool DidHitPipe = false;
     public bool DidMissPipe = false;
     public BirdAgent birdAgent;
-    public float countdownTime = 1f;
-    private float countdownRemaining = 1f;
+    public float countdownTime = 0.1f;
+    private float countdownRemaining = 0.1f;
     private bool hasGameStarted = false;
+
 
     [ContextMenu("Increase score")]
     public void addScore(int scoreToAdd)
@@ -96,6 +97,7 @@ public class LogicScript : MonoBehaviour
 
     public void restartGame()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     private void StartGame()
@@ -145,6 +147,8 @@ public class LogicScript : MonoBehaviour
     {
         gameOverScreen.SetActive(true);
         SaveHighScoreWithName(playerScore);
+        birdAgent.isGameOver = true;
+        Time.timeScale = 0;
         //restartGame();
     }
 

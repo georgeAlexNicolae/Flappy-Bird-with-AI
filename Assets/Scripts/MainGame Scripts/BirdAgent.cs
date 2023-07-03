@@ -15,6 +15,7 @@ public class BirdAgent : Agent
     private bool flap = false;
     public bool isCountdown = true;
     private int counter = 0;
+    public bool isGameOver = false;
 
     public override void Initialize()
     {
@@ -26,6 +27,7 @@ public class BirdAgent : Agent
         // Reset the bird's position and velocity
         myRigidBody.velocity = Vector2.zero;
         logic.playerScore = 0;
+        isGameOver = false;
         //if (isFirstRun)
         //{ 
         //    // Find all the pipe gaps in the scene
@@ -95,6 +97,8 @@ public class BirdAgent : Agent
 
     private void FixedUpdate()
     {
+        if (isGameOver)
+            return;
         if (counter <= 2)
         {
             myRigidBody.velocity = Vector2.up * flapStrength;
@@ -110,11 +114,14 @@ public class BirdAgent : Agent
 
     private void Update()
     {
+        if (isGameOver)
+            return;
         if (IsBirdOutOfScreen())
         {
             logic.gameOver();
             AddReward(-1f);
             EndEpisode();
+            isGameOver = true;
             //ClickPlayAgainButton();
         }
     }
@@ -129,6 +136,10 @@ public class BirdAgent : Agent
     private int lastInput;
     public override void Heuristic(in ActionBuffers actionsOut)
     {
+        if(isGameOver)
+        {
+            return;
+        }
         var discreteActions = actionsOut.DiscreteActions;
         discreteActions[0] = lastInput == 0?(Input.GetKey(KeyCode.Space) ? 1 : 0):0;
         lastInput = Input.GetKey(KeyCode.Space) ? 1 : 0;
@@ -136,6 +147,10 @@ public class BirdAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
+        if(isGameOver)
+        {
+            return;
+        }
         if (actions.DiscreteActions[0] == 1)
         {
             flap = true;

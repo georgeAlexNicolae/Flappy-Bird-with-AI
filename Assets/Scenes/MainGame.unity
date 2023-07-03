@@ -5627,6 +5627,7 @@ MonoBehaviour:
   flapStrength: 25
   logic: {fileID: 1712960503}
   isCountdown: 1
+  isGameOver: 0
 --- !u!58 &990041306
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6310,7 +6311,7 @@ MonoBehaviour:
   DidHitPipe: 0
   DidMissPipe: 0
   birdAgent: {fileID: 990041305}
-  countdownTime: 1
+  countdownTime: 0.1
 --- !u!4 &1712960504
 Transform:
   m_ObjectHideFlags: 0
