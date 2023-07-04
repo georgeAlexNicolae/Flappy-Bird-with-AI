@@ -4,6 +4,7 @@ using Unity.MLAgents.Actuators;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using Unity.MLAgents.Policies;
 
 public class BirdAgent : Agent
 {
@@ -16,6 +17,32 @@ public class BirdAgent : Agent
     public bool isCountdown = true;
     private int counter = 0;
     public bool isGameOver = false;
+
+    void Start()
+    {
+        // Get the BehaviorParameters component on this agent.
+        var behaviorParameters = GetComponent<BehaviorParameters>();
+
+        // Get the desired behavior type from PlayerPrefs.
+        string desiredBehaviorType = PlayerPrefs.GetString("AgentBehaviorType", "HeuristicOnly");
+
+        // Set the behavior type on the agent based on the desired behavior type.
+        if (desiredBehaviorType == "HeuristicOnly")
+        {
+            behaviorParameters.BehaviorType = BehaviorType.HeuristicOnly;
+        }
+        else if (desiredBehaviorType == "InferenceOnly")
+        {
+            behaviorParameters.BehaviorType = BehaviorType.InferenceOnly;
+        }
+        else
+        {
+            // Fallback to default behavior type (HeuristicOnly) if desired behavior type is not recognized.
+            behaviorParameters.BehaviorType = BehaviorType.HeuristicOnly;
+        }
+
+        // Other start code...
+    }
 
     public override void Initialize()
     {
