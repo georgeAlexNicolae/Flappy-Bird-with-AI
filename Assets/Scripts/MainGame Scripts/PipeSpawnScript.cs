@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PipeSpawnScript : MonoBehaviour
@@ -8,6 +9,8 @@ public class PipeSpawnScript : MonoBehaviour
     public float spawnRate = 4;
     private float timer = 0;
     public float heightOffset = 10;
+    public TextMeshProUGUI speedDisplayText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +29,7 @@ public class PipeSpawnScript : MonoBehaviour
             spawnPipe();
             timer = 0;
         }
-        
+        speedDisplayText.text = "Pipe Speed: " + spawnRate.ToString();
     }
     void spawnPipe()
     {
