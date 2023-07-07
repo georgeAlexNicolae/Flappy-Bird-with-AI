@@ -8,7 +8,9 @@ using System.Collections.Generic;
 using System.Net.Http;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Threading.Tasks;
 
 public class OpenAIController : MonoBehaviour
 {
@@ -90,10 +92,16 @@ public class OpenAIController : MonoBehaviour
         // Add the response to the list of messages
         messages.Add(responseMessage);
 
-
-
         //Update the text field with the response
         textField.text = string.Format("You: {0}\n\nGuard: {1}", userMessage.Content, responseMessage.Content);
+
+        // If user's message contains the password, switch to the game scene after a delay
+        if (userMessage.Content.Contains("avocado"))
+        {
+            Debug.Log("Correct password entered, switching to game scene...");
+            await Task.Delay(TimeSpan.FromSeconds(5));  // Wait for 2 seconds before switching scene
+            SceneManager.LoadScene("StartMenu");  // replace "MainGame" with the name of your game scene
+        }
 
         //re-enable ok button
         okButton.enabled = true;
